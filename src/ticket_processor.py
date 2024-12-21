@@ -42,9 +42,11 @@ class TicketProcessor:
 
         outer = response.json()
         data = json.loads(outer["value"])
-        if data["status"] != "000":
+        if data["status"] != "000" and data["msgEn"] != "Not found Ticket":
             log_json(40, "allTickets error", msgEn=data["msgEn"])
             raise Exception(f"allTickets error: {data['msgEn']}")
+        elif data["msgEn"] == "Not found Ticket":
+            return []
         return data["tickets"]
 
     def get_ticket_detail(self, ticketNo):
