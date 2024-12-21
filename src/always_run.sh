@@ -9,5 +9,10 @@ do
     else
         python3 main.py
     fi
+    # sleep 10, if ctrl+c is pressed, the script will stop
     sleep 10
+    if [ $? -eq 130 ]
+    then
+        break
+    fi
 done
